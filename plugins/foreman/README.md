@@ -1,3 +1,5 @@
+<img src="assets/logo.svg" alt="Foreman logo" width="96" height="96">
+
 # Foreman
 
 Foreman makes your Claude Code session the lead engineer on a team of other AI coding agents you

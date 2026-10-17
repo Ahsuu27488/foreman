@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-labelledby="title">
+  <title id="title">Foreman</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1B2433"/>
+      <stop offset="1" stop-color="#0B1018"/>
+    </linearGradient>
+    <linearGradient id="hat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFC24B"/>
+      <stop offset="1" stop-color="#F29A12"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="3" y="3" width="506" height="506" rx="109" fill="none" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="6"/>
+  <!-- crew: three workers wired to the lead -->
+  <g stroke="#2DD4BF" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9">
+    <path d="M256 322 L256 386"/>
+    <path d="M256 322 C256 360 166 352 166 386"/>
+    <path d="M256 322 C256 360 346 352 346 386"/>
+  </g>
+  <g fill="#2DD4BF">
+    <circle cx="166" cy="404" r="26"/>
+    <circle cx="256" cy="404" r="26"/>
+    <circle cx="346" cy="404" r="26"/>
+  </g>
+  <!-- the lead: a foreman's hard hat -->
+  <path d="M146 282 C146 186 196 128 256 128 C316 128 366 186 366 282 Z" fill="url(#hat)"/>
+  <rect x="238" y="128" width="36" height="154" rx="14" fill="#FFD77A"/>
+  <path d="M190 166 C176 190 168 226 168 270" stroke="#FFD77A" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.55"/>
+  <rect x="104" y="274" width="304" height="44" rx="22" fill="#E08A08"/>
+  <rect x="104" y="274" width="304" height="16" rx="8" fill="#FFB52E"/>
+</svg>

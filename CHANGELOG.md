@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.1
+
+- Logo (`assets/logo.svg`, `assets/logo.png`): a foreman's hard hat leading a crew of three.
+- Rewritten README with a how-it-works diagram, a real session, tier and CLI tables, a command
+  reference and an FAQ. New CONTRIBUTING.md and SECURITY.md.
+- Plugin README lists exactly what Foreman runs, sends and writes, for Anthropic's directory.
+- Author shown as Muhammad Ahsan.
+
 ## 0.4.0
 
 Changes from the first end-to-end tests (a lead delegating real tasks to Antigravity workers):

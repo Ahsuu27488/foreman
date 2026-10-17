@@ -4,7 +4,7 @@ description: Lets the lead agent delegate well-scoped, verifiable coding and res
 license: MIT
 compatibility: Python 3.10+ and git. Needs at least one worker CLI installed and signed in. Written for any agent that supports Agent Skills (Claude Code, Codex, Gemini CLI, Antigravity and others).
 metadata:
-  version: 0.4.0
+  version: 0.4.1
 ---
 
 # Foreman

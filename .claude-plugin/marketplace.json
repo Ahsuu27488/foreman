@@ -1,7 +1,7 @@
 {
   "name": "foreman",
   "description": "Delegate coding tasks to the CLI agents you already have, and review their work like a lead engineer.",
-  "owner": {"name": "Ahsuu27488"},
+  "owner": {"name": "Muhammad Ahsan", "url": "https://github.com/Ahsuu27488"},
   "plugins": [
     {
       "name": "foreman",
