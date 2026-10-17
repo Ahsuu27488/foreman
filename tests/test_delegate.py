@@ -24,10 +24,10 @@ _spec.loader.exec_module(delegate)
 GIT_ID = ["-c", "user.name=test", "-c", "user.email=test@example.com"]
 
 
-def fake_backend(**overrides):
+def fake_backend(mode="ok", **overrides):
     spec = {
         "binary": sys.executable,
-        "base": [str(FAKE), "--prompt", "{prompt}", "--model", "{model}"],
+        "base": [str(FAKE), "--mode", mode, "--prompt", "{prompt}", "--model", "{model}"],
         "edit": [],
         "readonly": [],
         "readonly_enforced": True,
@@ -185,7 +185,7 @@ class TestRun(CliTestCase):
 
     def test_quota_falls_back_to_next_worker(self):
         self.write_config({"balanced": ["broke", "fake"]},
-                          {"broke": fake_backend(env={"FAKE_MODE": "quota"}), "fake": fake_backend()})
+                          {"broke": fake_backend(mode="quota"), "fake": fake_backend()})
         code, res = self.run_task()
         self.assertEqual(code, 0, res)
         self.assertEqual([a["status"] for a in res["attempts"]], ["quota", "done"])
@@ -200,26 +200,26 @@ class TestRun(CliTestCase):
 
     def test_failure_does_not_fall_back(self):
         self.write_config({"balanced": ["bad", "fake"]},
-                          {"bad": fake_backend(env={"FAKE_MODE": "fail"}), "fake": fake_backend()})
+                          {"bad": fake_backend(mode="fail"), "fake": fake_backend()})
         code, res = self.run_task()
         self.assertEqual(code, 1)
         self.assertEqual(res["status"], "failed")
         self.assertEqual(len(res["attempts"]), 1)
 
     def test_all_unavailable(self):
-        self.write_config({"balanced": ["broke"]}, {"broke": fake_backend(env={"FAKE_MODE": "quota"})})
+        self.write_config({"balanced": ["broke"]}, {"broke": fake_backend(mode="quota")})
         code, res = self.run_task()
         self.assertEqual(code, 3)
         self.assertEqual(res["status"], "all_unavailable")
 
     def test_no_output(self):
-        self.write_config({"balanced": ["fake"]}, {"fake": fake_backend(env={"FAKE_MODE": "nothing"})})
+        self.write_config({"balanced": ["fake"]}, {"fake": fake_backend(mode="nothing")})
         code, res = self.run_task()
         self.assertEqual(code, 1)
         self.assertEqual(res["status"], "no_output")
 
     def test_timeout(self):
-        self.write_config({"balanced": ["fake"]}, {"fake": fake_backend(env={"FAKE_MODE": "slow"})})
+        self.write_config({"balanced": ["fake"]}, {"fake": fake_backend(mode="slow")})
         code, res = self.run_task("--timeout", "0.01")
         self.assertEqual(code, 4)
         self.assertEqual(res["status"], "timeout")

@@ -7,7 +7,7 @@
 **Make your best model the lead engineer. Let the AI coding agents you already pay for do the typing.**
 
 [![CI](https://github.com/Ahsuu27488/foreman/actions/workflows/test.yml/badge.svg)](https://github.com/Ahsuu27488/foreman/actions/workflows/test.yml)
-![Version](https://img.shields.io/badge/version-0.4.1-f29a12)
+![Version](https://img.shields.io/badge/version-0.4.2-f29a12)
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776ab)
 ![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-d97757)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2dd4bf)](LICENSE)

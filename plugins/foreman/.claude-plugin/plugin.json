@@ -1,7 +1,7 @@
 {
   "name": "foreman",
   "displayName": "Foreman",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Your lead agent delegates well-scoped coding tasks to other CLI agents you already pay for (Antigravity, Codex, Cursor, Copilot, Gemini CLI and more), picks a light, balanced or frontier model per task, then reviews and fixes the work before accepting it.",
   "author": {"name": "Muhammad Ahsan", "url": "https://github.com/Ahsuu27488"},
   "homepage": "https://github.com/Ahsuu27488/foreman",

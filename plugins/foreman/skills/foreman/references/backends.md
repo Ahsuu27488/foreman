@@ -113,7 +113,6 @@ Add an entry under `backends` in the user config. All fields:
       "effort_flag": ["--effort", "{effort}"],
       "efforts": ["low", "medium", "high"],
       "tail": [],
-      "env": {},
       "worker_note": null
     }
   }

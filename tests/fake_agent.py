@@ -1,4 +1,4 @@
-"""A stand-in worker CLI for tests. Behaviour is chosen with the FAKE_MODE environment variable.
+"""A stand-in worker CLI for tests. Behaviour is chosen with `--mode X` (or FAKE_MODE):
 
 ok       write the file named by FAKE_FILE (default out.txt) and print a JSON report
 quota    print a quota error and exit 1
@@ -20,7 +20,7 @@ if args[:1] == ["models"]:
         print(f"{m}\t{m.title()}")
     sys.exit(0)
 
-mode = os.environ.get("FAKE_MODE", "ok")
+mode = args[args.index("--mode") + 1] if "--mode" in args else os.environ.get("FAKE_MODE", "ok")
 prompt = sys.stdin.read() if "--stdin" in args else (args[args.index("--prompt") + 1] if "--prompt" in args else "")
 Path(os.environ.get("FAKE_ARGS_LOG", os.devnull)).write_text(json.dumps({"args": args, "prompt": prompt}))
 

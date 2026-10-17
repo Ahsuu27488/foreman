@@ -38,7 +38,7 @@ from datetime import datetime
 from pathlib import Path
 
 SKILL_NAME = "foreman"
-VERSION = "0.4.1"
+VERSION = "0.4.2"
 SCRIPT_DIR = Path(__file__).resolve().parent
 BACKENDS_FILE = SCRIPT_DIR / "backends.json"
 # Kept outside the skill folder so updating or reinstalling the skill never overwrites it.
@@ -262,11 +262,10 @@ def cmd_models(args) -> int:
 # ---------------------------------------------------------------- doctor / init
 
 def detect_lead() -> str | None:
-    """Which agent is running this script, from environment variables those agents set."""
+    """Which agent is running this script, from the marker variable that agent sets. Other leads
+    pass --lead to init."""
     if os.environ.get("CLAUDECODE"):
         return "claude"
-    if any(k.startswith("CODEX_") for k in os.environ):
-        return "codex"
     if os.environ.get("GEMINI_CLI"):
         return "gemini"
     return None
@@ -573,12 +572,13 @@ def run_once(spec: dict, model: str | None, prompt: str, workdir: Path, args,
         prompt = prompt.replace("--- BRIEF ---", f"Important: {note}\n\n--- BRIEF ---", 1)
     cmd, stdin = build_command(spec, binary, model, prompt, args.readonly, args.timeout,
                                args.continue_session, effort)
-    env = {**os.environ, **spec.get("env", {})}
     before = snapshot(workdir)
     started = datetime.now()
     try:
+        # The worker inherits the user's environment as-is; foreman reads and adds nothing, so each
+        # CLI authenticates with its own login.
         proc = subprocess.run(cmd, cwd=workdir, input=stdin, capture_output=True, text=True,
-                              encoding="utf-8", errors="replace", env=env,
+                              encoding="utf-8", errors="replace",
                               timeout=args.timeout * 60 + GRACE_SECONDS)
     except subprocess.TimeoutExpired:
         return {"status": "timeout", "model": model, "files": diff_snapshots(before, snapshot(workdir)),

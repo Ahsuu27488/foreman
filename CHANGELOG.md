@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.2
+
+- Foreman no longer copies or scans the environment: workers simply inherit it, and lead
+  detection checks only the `CLAUDECODE` and `GEMINI_CLI` marker variables (Codex leads pass
+  `--lead codex` to `init`). The unused per-backend `env` option is removed. This removes the
+  pattern behind the directory scanner's "uses a credential from the user's machine" hold.
+
 ## 0.4.1
 
 - Logo (`assets/logo.svg`, `assets/logo.png`): a foreman's hard hat leading a crew of three.
