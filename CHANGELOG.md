@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.3
+
+- When it cannot run local commands (claude.ai chat, cloud sandboxes) or finds no worker CLI, the
+  skill says delegation needs Claude Code on the user's computer and does the task itself.
+- PRIVACY.md, plus privacy policy, support and documentation links in plugin.json for the
+  directory listing.
+
 ## 0.4.2
 
 - Foreman no longer copies or scans the environment: workers simply inherit it, and lead

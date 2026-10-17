@@ -7,7 +7,7 @@
 **Make your best model the lead engineer. Let the AI coding agents you already pay for do the typing.**
 
 [![CI](https://github.com/Ahsuu27488/foreman/actions/workflows/test.yml/badge.svg)](https://github.com/Ahsuu27488/foreman/actions/workflows/test.yml)
-![Version](https://img.shields.io/badge/version-0.4.2-f29a12)
+![Version](https://img.shields.io/badge/version-0.4.3-f29a12)
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776ab)
 ![Claude Code plugin](https://img.shields.io/badge/Claude%20Code-plugin-d97757)
 [![License: MIT](https://img.shields.io/badge/license-MIT-2dd4bf)](LICENSE)
@@ -195,7 +195,7 @@ Example config for a Claude Code lead with a Google AI Pro plan:
   worker's vendor through its own CLI. Foreman makes no network requests of its own and has no
   telemetry. Some free tiers train on prompts, so keep secrets out of briefs.
 - Full disclosure of what runs and what is written: [plugin README](plugins/foreman/README.md).
-  Security reports: [SECURITY.md](SECURITY.md).
+  Security reports: [SECURITY.md](SECURITY.md). Privacy: [PRIVACY.md](PRIVACY.md).
 
 ## FAQ
 

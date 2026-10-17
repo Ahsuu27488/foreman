@@ -4,7 +4,7 @@ description: Lets the lead agent delegate well-scoped, verifiable coding and res
 license: MIT
 compatibility: Python 3.10+ and git. Needs at least one worker CLI installed and signed in. Written for any agent that supports Agent Skills (Claude Code, Codex, Gemini CLI, Antigravity and others).
 metadata:
-  version: 0.4.2
+  version: 0.4.3
 ---
 
 # Foreman
@@ -24,6 +24,11 @@ on Windows.
 
 Worker runs take minutes (often 5 to 10). If your shell tool times out sooner, run `delegate.py run`
 in the background or raise the tool's timeout, and keep working while it runs.
+
+Foreman needs a shell on the user's own machine, where their worker CLIs are installed. If you
+cannot run local commands (for example in claude.ai chat or a cloud sandbox), or `doctor` finds no
+worker CLIs, tell the user in one line that delegation needs Claude Code on their computer with a
+worker CLI installed, then do the task yourself as usual.
 
 ## First use on a machine
 

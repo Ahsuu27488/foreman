@@ -38,7 +38,7 @@ from datetime import datetime
 from pathlib import Path
 
 SKILL_NAME = "foreman"
-VERSION = "0.4.2"
+VERSION = "0.4.3"
 SCRIPT_DIR = Path(__file__).resolve().parent
 BACKENDS_FILE = SCRIPT_DIR / "backends.json"
 # Kept outside the skill folder so updating or reinstalling the skill never overwrites it.
