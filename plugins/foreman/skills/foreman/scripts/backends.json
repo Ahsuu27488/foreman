@@ -1,0 +1,217 @@
+{
+  "_doc": "Built-in worker backends. Placeholders: {prompt} {model} {timeout} {session} {effort}. A token containing {model} is dropped, with the flag before it, when no model is set, so the CLI's own default is used. Users override any field in their config instead of editing this file. 'verified' records the last real end-to-end run; anything else comes from the tool's documentation.",
+  "_preference": ["agy", "codex", "cursor", "copilot", "gemini", "qwen", "droid", "amp", "opencode", "aider", "goose", "crush", "continue", "claude"],
+  "_tier_rules": {
+    "light": ["haiku", "lite", "flashlite", "nano", "mini", "luna", "small", "tiny", "low", "fast", "instant", "micro", "air"],
+    "frontier": ["opus", "fable", "pro", "astra", "ultra", "max", "heavy", "argon", "xhigh"]
+  },
+
+  "agy": {
+    "label": "Google Antigravity CLI",
+    "binary": "agy",
+    "base": ["-p", "{prompt}", "--model", "{model}", "--output-format", "json", "--sandbox"],
+    "edit": ["--mode", "accept-edits"],
+    "readonly": ["--mode", "plan"],
+    "readonly_enforced": true,
+    "timeout_flag": ["--print-timeout", "{timeout}m"],
+    "effort_flag": ["--effort", "{effort}"],
+    "efforts": ["low", "medium", "high"],
+    "effort_models": "^gemini-",
+    "strip_named_effort": true,
+    "continue": ["--conversation", "{session}"],
+    "prompt_via": "arg",
+    "report_keys": ["response"],
+    "session_keys": ["conversation_id"],
+    "usage_keys": ["usage"],
+    "models_args": ["models"],
+    "worker_note": "Shell commands are disabled in this session, and any attempt to run one (including listing directories or running tests) ends the session immediately with nothing saved. Use only your file read, search and write tools.",
+    "notes": "Gemini models and Claude/GPT models draw on separate quotas in Antigravity. --effort works only for Gemini models, only with the base id (gemini-3.8-flash, not -high), and Gemini 3.8 Flash accepts low/medium/high; agy lists xhigh/max for other models, so add them to 'efforts' in your config if your model supports them.",
+    "verified": "agy 1.4.0, Windows 11, 2026-10-17 (edit, read-only and effort runs)"
+  },
+
+  "codex": {
+    "label": "OpenAI Codex CLI",
+    "binary": "codex",
+    "base": ["exec", "--json", "--skip-git-repo-check", "-m", "{model}"],
+    "edit": ["--sandbox", "workspace-write"],
+    "readonly": ["--sandbox", "read-only"],
+    "readonly_enforced": true,
+    "effort_flag": ["-c", "model_reasoning_effort={effort}"],
+    "efforts": ["minimal", "low", "medium", "high", "xhigh"],
+    "tail": ["-"],
+    "prompt_via": "stdin",
+    "report_keys": ["text", "message"],
+    "session_keys": ["thread_id", "session_id"],
+    "usage_keys": ["usage"],
+    "verified": "no"
+  },
+
+  "cursor": {
+    "label": "Cursor Agent CLI",
+    "binary": "cursor-agent",
+    "binary_alternatives": ["agent"],
+    "base": ["-p", "{prompt}", "--output-format", "json", "--model", "{model}"],
+    "edit": ["--force"],
+    "readonly": [],
+    "readonly_enforced": false,
+    "continue": ["--resume", "{session}"],
+    "prompt_via": "arg",
+    "report_keys": ["result"],
+    "session_keys": ["session_id"],
+    "verified": "no"
+  },
+
+  "copilot": {
+    "label": "GitHub Copilot CLI",
+    "binary": "copilot",
+    "base": ["-p", "{prompt}", "-s", "--model", "{model}"],
+    "edit": ["--allow-tool", "write"],
+    "readonly": [],
+    "readonly_enforced": false,
+    "prompt_via": "arg",
+    "output": "text",
+    "verified": "no"
+  },
+
+  "gemini": {
+    "label": "Google Gemini CLI",
+    "binary": "gemini",
+    "base": ["--skip-trust", "-m", "{model}", "-o", "json", "-p", "Complete the task described in the input above."],
+    "edit": ["--approval-mode", "auto_edit"],
+    "readonly": ["--approval-mode", "plan"],
+    "readonly_enforced": true,
+    "prompt_via": "stdin",
+    "report_keys": ["response"],
+    "session_keys": ["session_id"],
+    "usage_keys": ["stats"],
+    "notes": "Sign in with the Google account that holds the subscription; an API key may have no quota for Pro models.",
+    "verified": "partial: gemini-cli 0.50 flags checked 2026-10-17; run blocked by API-key quota"
+  },
+
+  "qwen": {
+    "label": "Qwen Code",
+    "binary": "qwen",
+    "base": ["-m", "{model}", "-o", "json", "-p", "Complete the task described in the input above."],
+    "edit": ["--approval-mode", "auto-edit"],
+    "readonly": ["--approval-mode", "plan"],
+    "readonly_enforced": false,
+    "prompt_via": "stdin",
+    "report_keys": ["result", "response"],
+    "session_keys": ["session_id"],
+    "usage_keys": ["usage", "stats"],
+    "verified": "no"
+  },
+
+  "droid": {
+    "label": "Factory Droid",
+    "binary": "droid",
+    "base": ["exec", "--output-format", "json", "-m", "{model}", "{prompt}"],
+    "edit": ["--auto", "low"],
+    "readonly": [],
+    "readonly_enforced": false,
+    "prompt_via": "arg",
+    "report_keys": ["result", "response"],
+    "session_keys": ["session_id"],
+    "verified": "no"
+  },
+
+  "amp": {
+    "label": "Amp",
+    "binary": "amp",
+    "base": ["-x", "{prompt}", "--stream-json"],
+    "edit": [],
+    "readonly": [],
+    "readonly_enforced": false,
+    "prompt_via": "arg",
+    "report_keys": ["result"],
+    "session_keys": ["session_id"],
+    "notes": "Amp picks models itself; execute mode needs paid credits.",
+    "verified": "no"
+  },
+
+  "opencode": {
+    "label": "OpenCode",
+    "binary": "opencode",
+    "base": ["run", "--format", "json", "-m", "{model}", "{prompt}"],
+    "edit": ["--agent", "build"],
+    "readonly": ["--agent", "plan"],
+    "readonly_enforced": false,
+    "continue": ["--session", "{session}"],
+    "prompt_via": "arg",
+    "report_keys": ["text", "content"],
+    "session_keys": ["sessionID", "session_id"],
+    "usage_keys": ["tokens", "usage"],
+    "models_args": ["models"],
+    "notes": "Many free models on OpenCode collect prompts for training.",
+    "verified": "partial: opencode 2.0.32 flags checked 2026-10-17"
+  },
+
+  "aider": {
+    "label": "Aider",
+    "binary": "aider",
+    "base": ["--model", "{model}", "--yes-always", "--no-auto-commits", "--no-stream", "--no-pretty", "--message", "{prompt}"],
+    "edit": [],
+    "readonly": ["--dry-run"],
+    "readonly_enforced": false,
+    "prompt_via": "arg",
+    "output": "text",
+    "notes": "Uses your own API keys, not a subscription.",
+    "verified": "no"
+  },
+
+  "goose": {
+    "label": "Goose",
+    "binary": "goose",
+    "base": ["run", "--no-session", "--model", "{model}", "-t", "{prompt}"],
+    "edit": [],
+    "readonly": [],
+    "readonly_enforced": false,
+    "prompt_via": "arg",
+    "output": "text",
+    "verified": "no"
+  },
+
+  "crush": {
+    "label": "Crush",
+    "binary": "crush",
+    "base": ["run", "-q", "{prompt}"],
+    "edit": [],
+    "readonly": [],
+    "readonly_enforced": false,
+    "prompt_via": "arg",
+    "output": "text",
+    "verified": "no"
+  },
+
+  "continue": {
+    "label": "Continue CLI",
+    "binary": "cn",
+    "base": ["-p", "{prompt}"],
+    "edit": ["--auto"],
+    "readonly": ["--readonly"],
+    "readonly_enforced": false,
+    "prompt_via": "arg",
+    "output": "text",
+    "verified": "no"
+  },
+
+  "claude": {
+    "label": "Claude Code",
+    "binary": "claude",
+    "base": ["-p", "--output-format", "json", "--model", "{model}"],
+    "edit": ["--permission-mode", "acceptEdits"],
+    "readonly": ["--permission-mode", "plan"],
+    "readonly_enforced": true,
+    "effort_flag": ["--effort", "{effort}"],
+    "efforts": ["low", "medium", "high", "xhigh", "max"],
+    "continue": ["--resume", "{session}"],
+    "prompt_via": "stdin",
+    "report_keys": ["result"],
+    "session_keys": ["session_id"],
+    "usage_keys": ["usage"],
+    "tiers": {"light": "haiku", "balanced": "sonnet", "frontier": "opus"},
+    "auto_route": false,
+    "notes": "Not added to routes automatically, and never when Claude Code is the lead, because that spends the same plan. Add it by hand if your lead runs elsewhere.",
+    "verified": "no"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "foreman",
+  "description": "Delegate coding tasks to the CLI agents you already have, and review their work like a lead engineer.",
+  "owner": {"name": "Ahsuu27488"},
+  "plugins": [
+    {
+      "name": "foreman",
+      "source": "./plugins/foreman",
+      "description": "Delegate well-scoped tasks to Antigravity, Codex, Cursor, Copilot, Gemini CLI and more, with tiered model routing and mandatory review."
+    }
+  ]
+}

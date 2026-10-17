@@ -1,0 +1,29 @@
+{
+  "skill_name": "foreman",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "add unit tests for every public function in src/utils/dates.py, we have like zero coverage there. use pytest and follow the style in tests/test_strings.py. try to save my claude limit on this one",
+      "expected_output": "Delegates on the balanced tier with --worktree, with a brief naming the allowed files, the style example and the pytest command; then runs pytest itself, reads the diff, and merges only after review.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "rename the `getUserData` function to `fetchUserProfile` everywhere in the frontend, there are a lot of call sites",
+      "expected_output": "Either does it directly (cheap mechanical change) or delegates on the light tier; in both cases verifies with a grep that no old references remain and that the build passes.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "the payment webhook sometimes double charges customers, can you figure out why",
+      "expected_output": "Does NOT delegate the fix (subtle, payment-related debugging). May use a --readonly worker to map the webhook code path, but makes the diagnosis and change itself.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "split our 3000-line services/orders.py into a package (orders/pricing.py, orders/fulfilment.py, orders/refunds.py) without changing behaviour, all tests must still pass. use the gemini worker",
+      "expected_output": "Delegates on the frontier tier (cross-module refactor) to an Antigravity/Gemini worker in a worktree, with a brief that forbids behaviour changes; reruns the full test suite and checks imports before merging.",
+      "files": []
+    }
+  ]
+}
