@@ -6,6 +6,7 @@
   "author": {"name": "Muhammad Ahsan", "url": "https://github.com/Ahsuu27488"},
   "homepage": "https://github.com/Ahsuu27488/foreman",
   "repository": "https://github.com/Ahsuu27488/foreman",
+  "icon": "./assets/logo.png",
   "documentationUrl": "https://github.com/Ahsuu27488/foreman#readme",
   "supportUrl": "https://github.com/Ahsuu27488/foreman/issues",
   "privacyPolicyUrl": "https://github.com/Ahsuu27488/foreman/blob/main/PRIVACY.md",
